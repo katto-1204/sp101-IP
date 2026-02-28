@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intellectual Property – Ethics and Law</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════
+   THEME VARIABLES
+═══════════════════════════════════════════ */
+        :root {
+            --orange: #FF4D1C;
+            --orange2: #FF6B3D;
+            --orange-dim: rgba(255, 77, 28, 0.18);
+            --orange-border: rgba(255, 77, 28, 0.28);
+            --green: #22C55E;
+        }
+
+        [data-theme="dark"] {
+            --bg: #090909;
+            --bg2: #111111;
+            --bg3: #161616;
+            --card: #111111;
+            --card2: #181818;
+            --border: rgba(255, 255, 255, 0.07);
+            --text: #F0EDE8;
+            --text2: #A8A49E;
+            --muted: #6B6762;
+            --white: #FFFFFF;
+            --table-head: rgba(80, 28, 10, 0.6);
+            --table-row: rgba(255, 255, 255, 0.02);
+            --table-row-alt: rgba(255, 255, 255, 0.04);
+            --orb1: rgba(255, 77, 28, 0.28);
+            --orb2: rgba(255, 60, 0, 0.15);
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="light"] {
+            --bg: #F5F3EF;
+            --bg2: #EDEBE7;
+            --bg3: #E5E2DC;
+            --card: #FFFFFF;
+            --card2: #F8F6F2;
+            --border: rgba(0, 0, 0, 0.08);
+            --text: #1A1714;
+            --text2: #4A4540;
+            --muted: #888480;
+            --white: #1A1714;
+            --table-head: rgba(255, 77, 28, 0.12);
+            --table-row: rgba(0, 0, 0, 0.02);
+            --table-row-alt: rgba(0, 0, 0, 0.04);
+            --orb1: rgba(255, 77, 28, 0.12);
+            --orb2: rgba(255, 100, 40, 0.08);
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        /* ═══════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            overflow: hidden;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        h1,
+        h2 {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ═══════════════════════════════════════════
+   PARALLAX SCENE
+═══════════════════════════════════════════ */
+        .scene {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .p-layer {
+            position: absolute;
+            inset: -8%;
+            will-change: transform;
+        }
+
+        .layer-grid {
+            background-image:
+                linear-gradient(rgba(255, 77, 28, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 77, 28, 0.04) 1px, transparent 1px);
+            background-size: 54px 54px;
+            transition: opacity 0.4s;
+        }
+
+        [data-theme="light"] .layer-grid {
+            background-image:
+                linear-gradient(rgba(255, 77, 28, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 77, 28, 0.07) 1px, transparent 1px);
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            transition: background 0.5s;
+        }
+
+        .orb-1 {
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, var(--orb1) 0%, transparent 70%);
+            top: -200px;
+            right: -160px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--orb2) 0%, transparent 70%);
+            bottom: -150px;
+            left: -120px;
+        }
+
+        .shape {
+            position: absolute;
+            border: 1px solid var(--orange);
+            transition: opacity 0.4s;
+        }
+
+        [data-theme="dark"] .shape {
+            opacity: 0.055;
+        }
+
+        [data-theme="light"] .shape {
+            opacity: 0.12;
+        }
+
+        .shape-1 {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            top: 10%;
+            left: 5%;
+        }
+
+        .shape-2 {
+            width: 130px;
+            height: 130px;
+            top: 60%;
+            right: 8%;
+            transform: rotate(45deg);
+        }
+
+        .shape-3 {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            bottom: 18%;
+            left: 40%;
+        }
+
+        /* ═══════════════════════════════════════════
+   SLIDES
+═══════════════════════════════════════════ */
+        .slides-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 52px 80px 78px;
+            opacity: 0;
+            transform: translateX(70px) scale(0.98);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            pointer-events: all;
+        }
+
+        .slide.exit {
+            opacity: 0;
+            transform: translateX(-70px) scale(0.98);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        /* ═══════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════ */
+        .eyebrow {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 22px;
+            height: 1px;
+            background: var(--orange);
+        }
+
+        h1.slide-h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(36px, 4.5vw, 58px);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--white);
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        h1.slide-h1 .accent {
+            color: var(--orange);
+        }
+
+        .hero-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(60px, 8vw, 108px);
+            font-weight: 900;
+            line-height: 0.92;
+            color: var(--white);
+            letter-spacing: -3px;
+            margin-bottom: 14px;
+        }
+
+        .hero-title .accent {
+            color: var(--orange);
+        }
+
+        .hero-title .ghost {
+            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.15);
+            color: transparent;
+        }
+
+        [data-theme="light"] .hero-title .ghost {
+            -webkit-text-stroke: 2px rgba(0, 0, 0, 0.12);
+        }
+
+        .slide-sub {
+            font-size: clamp(14px, 1.5vw, 17px);
+            color: var(--text2);
+            font-weight: 300;
+            max-width: 580px;
+            line-height: 1.65;
+        }
+
+        .rule {
+            width: 56px;
+            height: 2px;
+            background: var(--orange);
+            margin: 16px 0;
+            box-shadow: 0 0 8px rgba(255, 77, 28, 0.5);
+        }
+
+        /* ═══════════════════════════════════════════
+   CARDS
+═══════════════════════════════════════════ */
+        .cards {
+            display: grid;
+            gap: 14px;
+            margin-top: 26px;
+        }
+
+        .cards.c3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .cards.c2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px 18px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s, background 0.4s;
+            transform-style: preserve-3d;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 77, 28, 0.38);
+            box-shadow: 0 8px 32px var(--shadow);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1.5px;
+            background: linear-gradient(90deg, transparent, var(--orange), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card-icon {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 12px;
+            color: var(--orange);
+            display: block;
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 7px;
+        }
+
+        .card-body {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.65;
+        }
+
+        .card-body strong {
+            color: var(--orange2);
+            font-weight: 500;
+        }
+
+        /* ═══════════════════════════════════════════
+   BULLETS
+═══════════════════════════════════════════ */
+        .blist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .blist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            font-size: clamp(13px, 1.4vw, 16px);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .blist li svg {
+            width: 16px;
+            height: 16px;
+            color: var(--orange);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* check green variant */
+        .blist.green li svg {
+            color: var(--green);
+        }
+
+        /* ═══════════════════════════════════════════
+   STATS
+═══════════════════════════════════════════ */
+        .stats {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-top: 28px;
+        }
+
+        .stat {
+            border-left: 2px solid var(--orange);
+            padding-left: 18px;
+        }
+
+        .stat-n {
+            font-family: 'Inter', sans-serif;
+            font-size: 46px;
+            font-weight: 900;
+            color: var(--orange);
+            line-height: 1;
+            text-shadow: 0 0 24px rgba(255, 77, 28, 0.3);
+        }
+
+        .stat-l {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        /* Big stat cards */
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: background 0.4s, border 0.4s;
+        }
+
+        .stat-card .big {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 900;
+            color: var(--orange);
+            margin-bottom: 6px;
+        }
+
+        .stat-card .lbl {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.4;
+        }
+
+        /* ═══════════════════════════════════════════
+   CALLOUT
+═══════════════════════════════════════════ */
+        .callout {
+            background: var(--orange-dim);
+            border: 1px solid var(--orange-border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 16px;
+            font-size: clamp(13px, 1.3vw, 15px);
+            color: var(--text);
+            line-height: 1.65;
+            max-width: 860px;
+            transition: background 0.4s;
+        }
+
+        .callout strong {
+            color: var(--orange);
+            font-weight: 500;
+        }
+
+        /* ═══════════════════════════════════════════
+   PILLS
+═══════════════════════════════════════════ */
+        .pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .pill {
+            padding: 6px 16px;
+            background: var(--orange-dim);
+            border: 1px solid var(--orange-border);
+            border-radius: 100px;
+            font-size: 12px;
+            color: var(--orange2);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .pill:hover {
+            background: rgba(255, 77, 28, 0.26);
+        }
+
+        /* ═══════════════════════════════════════════
+   TWO-COL
+═══════════════════════════════════════════ */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 24px;
+            align-items: start;
+        }
+
+        /* ═══════════════════════════════════════════
+   LABEL SM
+═══════════════════════════════════════════ */
+        .lbl-sm {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 10px;
+        }
+
+        /* ═══════════════════════════════════════════
+   COMPARISON TABLE
+═══════════════════════════════════════════ */
+        .cmp-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .cmp-table th {
+            background: var(--table-head);
+            padding: 14px 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--orange);
+            text-align: left;
+            transition: background 0.4s;
+        }
+
+        .cmp-table th:first-child {
+            color: var(--muted);
+        }
+
+        .cmp-table td {
+            padding: 13px 20px;
+            font-size: 14px;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.4s, border 0.4s;
+        }
+
+        .cmp-table tr:nth-child(odd) td {
+            background: var(--table-row);
+        }
+
+        .cmp-table tr:nth-child(even) td {
+            background: var(--table-row-alt);
+        }
+
+        .cmp-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cmp-table td:first-child {
+            color: var(--muted);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* ═══════════════════════════════════════════
+   NUMBERED LIST (responsibilities)
+═══════════════════════════════════════════ */
+        .num-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .num-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 16px;
+            transition: background 0.4s, border 0.4s;
+        }
+
+        .num-item:hover {
+            border-color: rgba(255, 77, 28, 0.3);
+        }
+
+        .num-item .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--orange);
+            min-width: 24px;
+        }
+
+        .num-item .txt {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* Row items (responsibility) */
+        .row-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 13px 18px;
+            margin-bottom: 10px;
+            transition: background 0.4s, border 0.4s;
+        }
+
+        .row-item:hover {
+            border-color: rgba(255, 77, 28, 0.28);
+        }
+
+        .row-item svg {
+            width: 14px;
+            height: 14px;
+            color: var(--orange);
+            flex-shrink: 0;
+        }
+
+        .row-item span {
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        /* ═══════════════════════════════════════════
+   REAL WORLD CASE CARDS
+═══════════════════════════════════════════ */
+        .case-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
+            transition: background 0.4s, border 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-card:hover {
+            border-color: rgba(255, 77, 28, 0.35);
+        }
+
+        .case-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--orange-dim);
+            border: 1px solid var(--orange-border);
+            border-radius: 100px;
+            font-size: 11px;
+            color: var(--orange);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+
+        .case-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .case-body {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .case-outcome {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--green);
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ═══════════════════════════════════════════
+   SECTION GHOST
+═══════════════════════════════════════════ */
+        .s-ghost {
+            position: absolute;
+            bottom: 68px;
+            right: 68px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 100px;
+            letter-spacing: 2px;
+            pointer-events: none;
+            line-height: 1;
+            user-select: none;
+            transition: color 0.4s;
+        }
+
+        [data-theme="dark"] .s-ghost {
+            color: rgba(255, 77, 28, 0.035);
+        }
+
+        [data-theme="light"] .s-ghost {
+            color: rgba(255, 77, 28, 0.07);
+        }
+
+        /* ═══════════════════════════════════════════
+   BADGE
+═══════════════════════════════════════════ */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border: 1px solid var(--orange-border);
+            border-radius: 100px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 16px;
+        }
+
+        /* ═══════════════════════════════════════════
+   PROGRESS / NAV
+═══════════════════════════════════════════ */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--orange), var(--orange2));
+            transition: width 0.45s ease;
+            z-index: 300;
+            box-shadow: 0 0 10px var(--orange);
+        }
+
+        .brand {
+            position: fixed;
+            top: 22px;
+            left: 32px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 200;
+        }
+
+        .brand-ico {
+            width: 30px;
+            height: 30px;
+            background: var(--orange);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-ico svg {
+            width: 15px;
+            height: 15px;
+            color: #fff;
+        }
+
+        .brand-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--text);
+            text-transform: uppercase;
+            max-width: 260px;
+            line-height: 1.3;
+        }
+
+        /* THEME TOGGLE */
+        .theme-btn {
+            position: fixed;
+            top: 22px;
+            right: 32px;
+            z-index: 200;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--text);
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .theme-btn:hover {
+            border-color: rgba(255, 77, 28, 0.4);
+        }
+
+        .theme-btn svg {
+            width: 14px;
+            height: 14px;
+            color: var(--orange);
+        }
+
+        .nav {
+            position: fixed;
+            bottom: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--card);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 9px 20px;
+            z-index: 200;
+            transition: background 0.4s, border 0.4s;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: #fff;
+        }
+
+        .nav-btn svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--muted);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: var(--orange);
+            width: 16px;
+            border-radius: 3px;
+            box-shadow: 0 0 6px var(--orange);
+        }
+
+        .nav-n {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 2px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* ─── SLIDE-SPECIFIC ─── */
+        #s0 {
+            justify-content: flex-end;
+            padding-bottom: 100px;
+        }
+
+        #s0 .hero-title {
+            font-size: clamp(72px, 9vw, 116px);
+        }
+
+        #s14 {
+            align-items: center;
+            text-align: center;
+        }
+
+        #s14 .hero-title {
+            font-size: clamp(60px, 8vw, 100px);
+        }
+
+        #s14 .slide-sub {
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        #s14 .rule {
+            margin: 16px auto;
+        }
+
+        #s14 .pills {
+            justify-content: center;
+        }
+
+        #s14 .eyebrow {
+            justify-content: center;
+        }
+
+        /* closing CPT badges */
+        .cpt-badges {
+            display: flex;
+            gap: 14px;
+            margin-top: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cpt-b {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 20px;
+            min-width: 220px;
+            transition: background 0.4s, border 0.4s;
+        }
+
+        .cpt-b:hover {
+            border-color: rgba(255, 77, 28, 0.35);
+        }
+
+        .cpt-b-ico {
+            width: 34px;
+            height: 34px;
+            background: var(--orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cpt-b-ico span {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .cpt-b-txt {
+            font-size: 13px;
+            color: var(--text);
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ─── PARALLAX SCENE ─── -->
+    <div class="scene" id="scene">
+        <div class="p-layer layer-grid" data-speed="0.02"></div>
+        <div class="p-layer" data-speed="0.06">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+        </div>
+        <div class="p-layer" data-speed="0.1">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="brand">
+        <div class="brand-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+        </div>
+        <span class="brand-name">Information Technology – Ethics and Law</span>
+    </div>
+
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+        <span id="themeLabel">Light</span>
+    </button>
+
+    <div class="slides-wrapper">
+
+        <!-- ════════ SLIDE 0: TITLE ════════ -->
+        <div class="slide active" id="s0">
+            <div class="badge">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <path d="M3 9h18M9 21V9" />
+                </svg>
+                15 Slides · Kawasaki Format
+            </div>
+            <div class="hero-title">
+                INTELLECTUAL<br>
+                <span class="accent">PROPERTY</span><br>
+                <span class="ghost">ISSUES</span>
+            </div>
+            <div class="rule"></div>
+            <div class="slide-sub">Copyright · Patent · Trademark · Plagiarism · Open Source · Cybersquatting</div>
+            <div class="s-ghost">IP</div>
+        </div>
+
+        <!-- ════════ SLIDE 1: IP ISSUES OVERVIEW ════════ -->
+        <div class="slide" id="s1">
+            <div class="eyebrow">01 — Overview</div>
+            <h1 class="slide-h1">Intellectual <span class="accent">Property</span> Issues</h1>
+            <div class="two-col" style="gap:32px; margin-top:20px;">
+                <div>
+                    <div class="slide-sub" style="max-width:100%;margin-top:0;">
+                        IP refers to legal rights over creations of the mind — inventions, literary works, designs,
+                        symbols, and software. In the digital era, awareness is critical to avoid violations.
+                    </div>
+                    <div class="stats" style="margin-top:20px;gap:22px;">
+                        <div class="stat">
+                            <div class="stat-n">$600B+</div>
+                            <div class="stat-l">Annual IP theft losses</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-n">80%</div>
+                            <div class="stat-l">Company value is intangible</div>
+                        </div>
+                    </div>
+                    <div class="callout" style="margin-top:16px;">
+                        IP violations lead to <strong>legal penalties, civil lawsuits, monetary damages,</strong> and
+                        irreversible reputational damage.
+                    </div>
+                </div>
+                <div>
+                    <div class="lbl-sm">Common Issues</div>
+                    <div class="cards c2" style="margin-top:10px;">
+                        <div class="card">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <rect x="2" y="3" width="20" height="14" rx="2" />
+                                <path d="M8 21h8M12 17v4" />
+                            </svg>
+                            <div class="card-title">Software Piracy</div>
+                            <div class="card-body">Unauthorized reproduction &amp; distribution of proprietary software.
+                            </div>
+                        </div>
+                        <div class="card">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path
+                                    d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+                                <line x1="7" y1="7" x2="7.01" y2="7" />
+                            </svg>
+                            <div class="card-title">Brand Imitation</div>
+                            <div class="card-body">Unauthorized use of protected brand identifiers.</div>
+                        </div>
+                        <div class="card">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            <div class="card-title">Patent Misuse</div>
+                            <div class="card-body">Using patented technology without a valid license.</div>
+                        </div>
+                        <div class="card">
+                            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="8" x2="12" y2="12" />
+                                <line x1="12" y1="16" x2="12.01" y2="16" />
+                            </svg>
+                            <div class="card-title">Domain Abuse</div>
+                            <div class="card-body">Cybersquatting and misuse of trademark-related domains.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-ghost">01</div>
+        </div>
+
+        <!-- ════════ SLIDE 2: COPYRIGHT ════════ -->
+        <div class="slide" id="s2">
+            <div class="eyebrow">02 — CPT</div>
+            <h1 class="slide-h1">© <span class="accent">Copyright</span></h1>
+            <div class="two-col" style="margin-top:20px; gap:36px;">
+                <div>
+                    <div class="slide-sub" style="max-width:100%;margin-top:0;margin-bottom:16px;">
+                        Automatically protects original works of authorship fixed in tangible form — from the moment of
+                        creation. No registration required.
+                    </div>
+                    <div class="pills">
+                        <span class="pill">Software Code</span>
+                        <span class="pill">Graphic Design</span>
+                        <span class="pill">Music &amp; Film</span>
+                        <span class="pill">Websites</span>
+                        <span class="pill">Books &amp; Research</span>
+                    </div>
+                    <div class="callout" style="margin-top:16px;">
+                        Lasts <strong>life of the author + ~70 years.</strong> Covers expression of ideas, not the
+                        underlying idea itself.
+                    </div>
+                </div>
+                <div>
+                    <div class="lbl-sm">Key Characteristics</div>
+                    <ul class="blist" style="margin-top:10px;">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Protection is automatic upon creation</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Covers expression of ideas, not the ideas themselves</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Copying code without permission = infringement</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Redistributing proprietary software = infringement</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Fair use doctrine allows limited educational use</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="s-ghost">©</div>
+        </div>
+
+        <!-- ════════ SLIDE 3: PATENT ════════ -->
+        <div class="slide" id="s3">
+            <div class="eyebrow">03 — CPT</div>
+            <h1 class="slide-h1">⚙ <span class="accent">Patent</span></h1>
+            <div class="two-col" style="margin-top:20px; gap:36px;">
+                <div>
+                    <div class="slide-sub" style="max-width:100%;margin-top:0;margin-bottom:16px;">
+                        Protects inventions and technical solutions to problems. Grants the inventor exclusive rights to
+                        make, use, or sell the invention for a limited period (~20 years).
+                    </div>
+                    <div class="cards c2" style="margin-top:0;">
+                        <div class="card">
+                            <svg class="card-icon" style="width:26px;height:26px;" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8">
+                                <circle cx="12" cy="12" r="3" />
+                                <path
+                                    d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+                            </svg>
+                            <div class="card-title">Utility Patent</div>
+                            <div class="card-body">New processes, machines, systems — the most common type.</div>
+                        </div>
+                        <div class="card">
+                            <svg class="card-icon" style="width:26px;height:26px;" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                            <div class="card-title">Design Patent</div>
+                            <div class="card-body">Ornamental design or unique appearance of a product.</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="lbl-sm">Requirements</div>
+                    <ul class="blist" style="margin-top:10px;">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Novelty — must be new and original</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Non-obviousness — not trivial to experts</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Industrial applicability — practical use</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Must apply — not automatic like copyright</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>In IT: covers hardware, algorithms &amp; architectures</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="s-ghost">⚙</div>
+        </div>
+
+        <!-- ════════ SLIDE 4: TRADEMARK ════════ -->
+        <div class="slide" id="s4">
+            <div class="eyebrow">04 — CPT</div>
+            <h1 class="slide-h1">™ <span class="accent">Trademark</span></h1>
+            <div class="two-col" style="margin-top:20px; gap:36px;">
+                <div>
+                    <div class="slide-sub" style="max-width:100%;margin-top:0;margin-bottom:16px;">
+                        Protects brand identifiers — names, logos, slogans, product names, and symbols. Purpose: prevent
+                        consumer confusion and protect brand identity.
+                    </div>
+                    <div class="pills">
+                        <span class="pill">Business Names</span>
+                        <span class="pill">Logos</span>
+                        <span class="pill">Slogans</span>
+                        <span class="pill">Product Names</span>
+                        <span class="pill">Symbols</span>
+                    </div>
+                    <div class="callout" style="margin-top:16px;">
+                        Unlike patents, trademarks can last <strong>indefinitely</strong> as long as they remain in
+                        active use and registration is maintained.
+                    </div>
+                </div>
+                <div>
+                    <div class="lbl-sm">Key Facts</div>
+                    <ul class="blist" style="margin-top:10px;">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Prevents consumer confusion in the market</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Protects brand identity and market reputation</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Can exist as common law (unregistered) or registered</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Registration is recommended for full protection</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Must conduct clearance search before launch</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="s-ghost">™</div>
+        </div>
+
+        <!-- ════════ SLIDE 5: COMPARISON TABLE ════════ -->
+        <div class="slide" id="s5">
+            <div class="eyebrow">Comparison</div>
+            <h1 class="slide-h1">Copyright vs Patent vs <span class="accent">Trademark</span></h1>
+            <table class="cmp-table">
+                <thead>
+                    <tr>
+                        <th style="width:18%;"></th>
+                        <th>Copyright</th>
+                        <th>Patent</th>
+                        <th>Trademark</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Protects</td>
+                        <td>Creative Works</td>
+                        <td>Inventions</td>
+                        <td>Brand Identity</td>
+                    </tr>
+                    <tr>
+                        <td>Duration</td>
+                        <td>Life + 70 years</td>
+                        <td>~20 years</td>
+                        <td>Indefinite</td>
+                    </tr>
+                    <tr>
+                        <td>Registration</td>
+                        <td>Automatic</td>
+                        <td>Required</td>
+                        <td>Recommended</td>
+                    </tr>
+                    <tr>
+                        <td>Examples</td>
+                        <td>Code, Books, Art</td>
+                        <td>Algorithms, Hardware</td>
+                        <td>Logos, Names</td>
+                    </tr>
+                    <tr>
+                        <td>Cost</td>
+                        <td>Free / Low</td>
+                        <td>High</td>
+                        <td>Moderate</td>
+                    </tr>
+                    <tr>
+                        <td>In IT</td>
+                        <td>Source code, UI designs</td>
+                        <td>Software patents, systems</td>
+                        <td>App names, brand logos</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="s-ghost">CPT</div>
+        </div>
+
+        <!-- ════════ SLIDE 6: PLAGIARISM ════════ -->
+        <div class="slide" id="s6">
+            <div class="eyebrow">05 — Ethics</div>
+            <h1 class="slide-h1"><span class="accent">Plagiarism</span></h1>
+            <div class="two-col" style="gap:38px; margin-top:20px;">
+                <div>
+                    <div class="slide-sub" style="max-width:100%;margin-top:0;margin-bottom:14px;">
+                        Presenting another person's work, ideas, or expressions as your own without proper
+                        acknowledgment.
+                    </div>
+                    <div class="lbl-sm">Forms of Plagiarism</div>
+                    <ul class="blist" style="margin-top:10px; gap:9px;">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Copy-pasting text without citation</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Submitting downloaded assignments</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Reusing code without attribution</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Paraphrasing without credit</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="lbl-sm">Consequences</div>
+                    <div class="card" style="margin-top:10px; margin-bottom:12px;">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)"
+                                stroke-width="1.8">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                            </svg>
+                            <div class="card-title" style="margin:0;">Academic</div>
+                        </div>
+                        <div class="card-body">Failing grades · Suspension · Expulsion · Permanent academic record</div>
+                    </div>
+                    <div class="card">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)"
+                                stroke-width="1.8">
+                                <rect x="2" y="7" width="20" height="14" rx="2" />
+                                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                            </svg>
+                            <div class="card-title" style="margin:0;">Professional</div>
+                        </div>
+                        <div class="card-body">Loss of employment · Legal liability · <strong>Industry
+                                blacklisting</strong> · Reputational damage</div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-ghost">PL</div>
+        </div>
+
+        <!-- ════════ SLIDE 7: OPEN SOURCE ════════ -->
+        <div class="slide" id="s7">
+            <div class="eyebrow">06 — Licensing</div>
+            <h1 class="slide-h1">Open Source <span class="accent">Code</span></h1>
+            <div class="cards c3" style="margin-top:20px;">
+                <div class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <rect x="3" y="11" width="18" height="11" rx="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                    <div class="card-title">MIT License</div>
+                    <div class="card-body">Most permissive. Use, modify, redistribute freely. Only keep copyright
+                        notice. <strong>Commercial use OK.</strong></div>
+                </div>
+                <div class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <polyline points="17 1 21 5 17 9" />
+                        <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                        <polyline points="7 23 3 19 7 15" />
+                        <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                    </svg>
+                    <div class="card-title">GNU GPL</div>
+                    <div class="card-body">Copyleft principle. Derivative works <strong>must also be GPL.</strong>
+                        Source stays open. Used by Linux kernel.</div>
+                </div>
+                <div class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                    <div class="card-title">Apache 2.0</div>
+                    <div class="card-body">Business-friendly. Requires attribution. Grants <strong>patent
+                            protection</strong>. Used by Android, Kubernetes.</div>
+                </div>
+            </div>
+            <div class="callout" style="margin-top:14px;">
+                <svg style="display:inline;width:13px;height:13px;vertical-align:middle;margin-right:7px;"
+                    viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5">
+                    <path
+                        d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+                Misunderstanding open-source licensing is a <strong>major legal risk for startups.</strong> Compliance
+                is mandatory — license type determines what you can ship commercially.
+            </div>
+            <div class="s-ghost">OSS</div>
+        </div>
+
+        <!-- ════════ SLIDE 8: TRADEMARK INFRINGEMENT ════════ -->
+        <div class="slide" id="s8">
+            <div class="eyebrow">07 — Legal</div>
+            <h1 class="slide-h1">Trademark <span class="accent">Infringement</span></h1>
+            <div class="two-col" style="margin-top:20px; gap:36px;">
+                <div>
+                    <div class="slide-sub" style="max-width:100%;margin-top:0;margin-bottom:14px;">
+                        Using a mark <strong style="color:var(--text)">identical or confusingly similar</strong> to a
+                        registered trademark without authorization.
+                    </div>
+                    <div class="callout" style="margin-top:0;margin-bottom:14px;font-size:13px;">
+                        Legal standard: <strong>"Likelihood of consumer confusion"</strong>
+                    </div>
+                    <div class="lbl-sm">Common Examples</div>
+                    <ul class="blist" style="margin-top:10px; gap:8px;">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>Logo confusingly similar to known brand</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>Brand name used in misleading context</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>Selling counterfeit goods</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>Mimicking product packaging (trade dress)</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="lbl-sm">Penalties</div>
+                    <div class="cards c2" style="margin-top:10px;">
+                        <div class="card">
+                            <svg class="card-icon" style="width:26px;height:26px;" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+                            </svg>
+                            <div class="card-title">Injunction</div>
+                            <div class="card-body">Immediate court order to halt infringing activity.</div>
+                        </div>
+                        <div class="card">
+                            <svg class="card-icon" style="width:26px;height:26px;" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8">
+                                <line x1="12" y1="1" x2="12" y2="23" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                            <div class="card-title">Damages</div>
+                            <div class="card-body">Financial compensation + destruction of goods.</div>
+                        </div>
+                        <div class="card" style="grid-column:1/-1;">
+                            <svg class="card-icon" style="width:26px;height:26px;" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                <polyline points="9 22 9 12 15 12 15 22" />
+                            </svg>
+                            <div class="card-title">Forced Rebrand</div>
+                            <div class="card-body">Startups must check trademark conflicts <strong>before
+                                    launch</strong> — rebranding is extremely costly.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-ghost">™</div>
+        </div>
+
+        <!-- ════════ SLIDE 9: CYBERSQUATTING ════════ -->
+        <div class="slide" id="s9">
+            <div class="eyebrow">08 — Domain</div>
+            <h1 class="slide-h1">Cyber<span class="accent">squatting</span></h1>
+            <div class="two-col" style="margin-top:20px; gap:36px;">
+                <div>
+                    <div class="slide-sub" style="max-width:100%;margin-top:0;margin-bottom:14px;">
+                        Registering, trafficking, or using domain names identical or confusingly similar to established
+                        trademarks — typically <strong style="color:var(--text)">for profit</strong>.
+                    </div>
+                    <div class="lbl-sm">Common Motives</div>
+                    <ul class="blist" style="margin-top:10px; gap:9px;">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Reselling domain to trademark owner at inflated price</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Redirecting legitimate web traffic illegally</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Damaging brand reputation</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Misleading consumers via lookalike domains</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="lbl-sm">Legal Framework</div>
+                    <div class="card" style="margin-top:10px;margin-bottom:12px;">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)"
+                                stroke-width="1.8">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="2" y1="12" x2="22" y2="12" />
+                                <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                            </svg>
+                            <div class="card-title" style="margin:0;">ICANN UDRP</div>
+                        </div>
+                        <div class="card-body">International dispute resolution. Rightful owners reclaim domains without
+                            lengthy litigation.</div>
+                    </div>
+                    <div class="card">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)"
+                                stroke-width="1.8">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
+                            <div class="card-title" style="margin:0;">Anti-Cybersquatting Laws</div>
+                        </div>
+                        <div class="card-body"><strong>Forced domain transfer</strong> · Financial penalties ·
+                            Litigation costs.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-ghost">06</div>
+        </div>
+
+        <!-- ════════ SLIDE 10: IP IN IT AND BUSINESS ════════ -->
+        <div class="slide" id="s10">
+            <div class="eyebrow">Impact</div>
+            <h1 class="slide-h1">IP in IT and <span class="accent">Business</span></h1>
+            <div class="cards c3" style="margin-top:16px;">
+                <div class="stat-card">
+                    <div class="big">$6.6T</div>
+                    <div class="lbl">Annual IP-intensive industry output in the US</div>
+                </div>
+                <div class="stat-card">
+                    <div class="big">45M+</div>
+                    <div class="lbl">Jobs supported by IP-intensive industries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="big">52%</div>
+                    <div class="lbl">Of US exports driven by IP-intensive sectors</div>
+                </div>
+            </div>
+            <div class="two-col" style="margin-top:14px; gap:14px;">
+                <div class="card">
+                    <div class="card-title" style="font-size:16px;margin-bottom:12px;">For Startups</div>
+                    <ul class="blist green" style="margin-top:0; gap:9px;">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>IP assets increase company valuation</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Proper IP protection prevents imitation</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Investors evaluate IP ownership before funding</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title" style="font-size:16px;margin-bottom:12px;">For Professionals</div>
+                    <ul class="blist green" style="margin-top:0; gap:9px;">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Ethical use of content protects reputation</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Awareness prevents accidental violations</li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>Respecting IP fosters professional integrity</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="s-ghost">BIZ</div>
+        </div>
+
+        <!-- ════════ SLIDE 11: ETHICAL & LEGAL RESPONSIBILITIES ════════ -->
+        <div class="slide" id="s11">
+            <div class="eyebrow">Responsibility</div>
+            <h1 class="slide-h1">Ethical and Legal <span class="accent">Responsibilities</span></h1>
+            <div class="two-col" style="margin-top:18px; gap:36px;">
+                <div>
+                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--orange)"
+                            stroke-width="1.8">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        <div class="card-title" style="font-size:16px;margin:0;">Responsible Use of IP</div>
+                    </div>
+                    <div class="row-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg><span>Citing all sources properly</span></div>
+                    <div class="row-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg><span>Reviewing software licenses before use</span></div>
+                    <div class="row-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg><span>Registering original trademarks</span></div>
+                    <div class="row-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg><span>Avoiding unauthorized use of protected material</span></div>
+                    <div class="row-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg><span>Conducting IP audits in organizations</span></div>
+                </div>
+                <div>
+                    <div class="lbl-sm">Preventive Measures</div>
+                    <div class="num-list" style="margin-top:10px;">
+                        <div class="num-item"><span class="num">01</span><span class="txt">Use plagiarism detection
+                                tools</span></div>
+                        <div class="num-item"><span class="num">02</span><span class="txt">Maintain documentation of
+                                original work</span></div>
+                        <div class="num-item"><span class="num">03</span><span class="txt">Seek licensing when
+                                required</span></div>
+                        <div class="num-item"><span class="num">04</span><span class="txt">Consult legal professionals
+                                before product launch</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="s-ghost">ETH</div>
+        </div>
+
+        <!-- ════════ SLIDE 12: NOTABLE IP CASES ════════ -->
+        <div class="slide" id="s12">
+            <div class="eyebrow">Real World</div>
+            <h1 class="slide-h1">Notable <span class="accent">IP Cases</span></h1>
+            <div class="cards c3" style="margin-top:20px;">
+                <div class="case-card">
+                    <div>
+                        <span class="case-tag">Copyright</span>
+                        <div class="case-title">Oracle v. Google</div>
+                        <div class="case-body">Multi-billion dollar case over Java API usage in Android. Highlighted
+                            fair use in software development. Reached the US Supreme Court.</div>
+                    </div>
+                    <div class="case-outcome">Google won (Supreme Court)</div>
+                </div>
+                <div class="case-card">
+                    <div>
+                        <span class="case-tag">Patent</span>
+                        <div class="case-title">Apple v. Samsung</div>
+                        <div class="case-body">Design patent dispute over smartphone appearance and user interface
+                            elements. One of the largest patent battles in tech history.</div>
+                    </div>
+                    <div class="case-outcome">$539M in damages</div>
+                </div>
+                <div class="case-card">
+                    <div>
+                        <span class="case-tag">Cybersquatting</span>
+                        <div class="case-title">Microsoft v. MikeRoweSoft</div>
+                        <div class="case-body">A teenager registered mikerowesoft.com. Domain name was confusingly
+                            similar to Microsoft. Classic example of cybersquatting dispute.</div>
+                    </div>
+                    <div class="case-outcome">Domain transferred</div>
+                </div>
+            </div>
+            <div class="s-ghost">⚖</div>
+        </div>
+
+        <!-- ════════ SLIDE 13: SUMMARY ════════ -->
+        <div class="slide" id="s13">
+            <div class="eyebrow">Summary</div>
+            <h1 class="slide-h1">Key <span class="accent">Takeaways</span></h1>
+            <div class="cards c3" style="margin-top:20px;">
+                <div class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M14.83 14.83A4 4 0 1 1 9.17 9.17" />
+                    </svg>
+                    <div class="card-title">Know Your Rights</div>
+                    <div class="card-body">Copyright protects your creative work automatically. Patent and trademark
+                        require deliberate registration and strategy.</div>
+                </div>
+                <div class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    <div class="card-title">Respect Others' IP</div>
+                    <div class="card-body">Plagiarism, license violations, and brand imitation have serious academic,
+                        professional, and legal consequences.</div>
+                </div>
+                <div class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    <div class="card-title">Act Proactively</div>
+                    <div class="card-body">Conduct IP audits, register trademarks before launch, review all open-source
+                        licenses, and consult legal counsel.</div>
+                </div>
+            </div>
+            <div class="callout" style="margin-top:14px; max-width:100%;">
+                IP is a <strong>foundational element</strong> of modern digital and business ecosystems. Proper
+                management safeguards innovation, ensures fair competition, and sustains long-term growth.
+            </div>
+            <div class="s-ghost">∑</div>
+        </div>
+
+        <!-- ════════ SLIDE 14: CLOSING ════════ -->
+        <div class="slide" id="s14">
+            <div class="eyebrow">Conclusion</div>
+            <div class="hero-title">
+                PROTECT<br>WHAT YOU<br><span class="accent">CREATE.</span>
+            </div>
+            <div class="rule"></div>
+            <div class="slide-sub">
+                Intellectual Property is a foundational element of modern digital and business ecosystems. Understanding
+                IP is not merely a legal obligation but a strategic necessity.
+            </div>
+            <div class="cpt-badges">
+                <div class="cpt-b">
+                    <div class="cpt-b-ico"><span>C</span></div><span class="cpt-b-txt">Copyright protects creative
+                        works</span>
+                </div>
+                <div class="cpt-b">
+                    <div class="cpt-b-ico"><span>P</span></div><span class="cpt-b-txt">Patents protect inventions</span>
+                </div>
+                <div class="cpt-b">
+                    <div class="cpt-b-ico"><span>T</span></div><span class="cpt-b-txt">Trademarks protect brands</span>
+                </div>
+            </div>
+            <div class="s-ghost">IP</div>
+        </div>
+
+    </div><!-- end slides-wrapper -->
+
+    <!-- NAV -->
+    <nav class="nav">
+        <button class="nav-btn" onclick="changeSlide(-1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6" />
+            </svg>
+        </button>
+        <div class="nav-dots" id="navDots"></div>
+        <span class="nav-n" id="navN">01 / 15</span>
+        <button class="nav-btn" onclick="changeSlide(1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6" />
+            </svg>
+        </button>
+    </nav>
+
+    <script>
+        // ─── SLIDES ───
+        let cur = 0;
+        const slides = Array.from(document.querySelectorAll('.slide'));
+        const total = slides.length;
+        const progressBar = document.getElementById('progressBar');
+        const navN = document.getElementById('navN');
+        const navDots = document.getElementById('navDots');
+
+        slides.forEach((_, i) => {
+            const d = document.createElement('div');
+            d.className = 'dot' + (i === 0 ? ' active' : '');
+            d.onclick = () => goTo(i);
+            navDots.appendChild(d);
+        });
+
+        function updateUI() {
+            navN.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+            progressBar.style.width = ((cur + 1) / total * 100) + '%';
+            document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+        }
+
+        function goTo(next) {
+            if (next < 0 || next >= total || next === cur) return;
+            slides[cur].classList.remove('active');
+            slides[cur].classList.add('exit');
+            const prev = cur; cur = next;
+            slides[cur].classList.remove('exit');
+            slides[cur].classList.add('active');
+            setTimeout(() => slides[prev].classList.remove('exit'), 450);
+            updateUI();
+        }
+
+        function changeSlide(dir) { goTo(cur + dir); }
+
+        document.addEventListener('keydown', e => {
+            if (['ArrowRight', 'ArrowDown', ' '].includes(e.key)) { e.preventDefault(); changeSlide(1); }
+            if (['ArrowLeft', 'ArrowUp'].includes(e.key)) { e.preventDefault(); changeSlide(-1); }
+        });
+
+        updateUI();
+
+        // ─── THEME ───
+        let isDark = true;
+        function toggleTheme() {
+            isDark = !isDark;
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            document.getElementById('themeLabel').textContent = isDark ? 'Light' : 'Dark';
+            const icon = document.getElementById('themeIcon');
+            if (isDark) {
+                icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+            } else {
+                icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+            }
+        }
+
+        // ─── PARALLAX ───
+        const layers = document.querySelectorAll('.p-layer');
+        let mx = 0, my = 0, cx = 0, cy = 0;
+        const W = () => window.innerWidth, H = () => window.innerHeight;
+
+        document.addEventListener('mousemove', e => {
+            mx = (e.clientX / W() - 0.5) * 2;
+            my = (e.clientY / H() - 0.5) * 2;
+        });
+
+        (function animP() {
+            cx += (mx - cx) * 0.055; cy += (my - cy) * 0.055;
+            layers.forEach(l => {
+                const s = parseFloat(l.dataset.speed || 0.03);
+                l.style.transform = `translate(${cx * s * 70}px,${cy * s * 70}px)`;
+            });
+            requestAnimationFrame(animP);
+        })();
+
+        // ─── 3D CARD TILT ───
+        document.addEventListener('mousemove', e => {
+            const rx = (e.clientY / H() - 0.5) * 5;
+            const ry = (e.clientX / W() - 0.5) * -5;
+            document.querySelectorAll('.slide.active .card, .slide.active .case-card, .slide.active .stat-card').forEach((el, i) => {
+                const f = 0.22 + i * 0.035;
+                el.style.transform = `perspective(900px) rotateX(${rx * f}deg) rotateY(${ry * f}deg) translateY(-2px)`;
+            });
+        });
+
+        document.addEventListener('mouseleave', () => {
+            document.querySelectorAll('.card,.case-card,.stat-card').forEach(el => el.style.transform = '');
+        });
+    </script>
+</body>
+
+</html>
